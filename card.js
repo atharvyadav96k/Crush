@@ -10,7 +10,8 @@ class Paper{
 
     currentpaperX = 0;
     currentpaperY = 0;
-    init(paper){
+    angle = [0, -10, 4, -10]
+    init(paper, index){
         paper.addEventListener('mousedown' , (e)=>{
            this.holdingpaper = true;
            if(e.button === 0){
@@ -30,7 +31,7 @@ class Paper{
             if(this.holdingpaper){
                 this.currentpaperX += this.velocityX;
                 this.currentpaperY += this.velocityY;
-                paper.style.transform =  `translateX(${(this.mouseX - card_posX)-100}px) translateY(${(this.mouseY - card_posY)-100}px)`
+                paper.style.transform =  `translateX(${(this.mouseX - card_posX)-100}px) translateY(${(this.mouseY - card_posY)-100}px) rotate(${this.angle[index]}deg)`
                 console.log("posx",this.mouseX - card_posX)
                 console.log(this.mouseX, this.mouseY)
                 
@@ -42,7 +43,7 @@ class Paper{
     }
 }
 const papers = Array.from(document.querySelectorAll('.card'));
-papers.forEach(paper => {
+papers.forEach((paper, index) => {
     const p = new Paper;
-    p.init(paper)
+    p.init(paper, index)
 })
